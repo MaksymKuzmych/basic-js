@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js')
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Given a string, return its encoding version.
@@ -11,26 +11,29 @@ const { NotImplementedError } = require('../extensions/index.js')
  *
  */
 function encodeLine(str) {
-  let arr = str.split('')
-  let resArr = []
+  const arr = str.split('');
+  const resArr = [];
+  const resWithNumbers = [];
+
   arr.forEach((el, idx) => {
     if (el === arr[idx - 1]) {
-      resArr[resArr.length - 1].push(el)
+      resArr[resArr.length - 1].push(el);
     } else {
-      resArr.push([el])
+      resArr.push([el]);
     }
-  })
-  let resWithNumbers = []
+  });
+
   resArr.forEach((el) => {
     if (el.length > 1) {
-      resWithNumbers.push(`${el.length}${el[0]}`)
+      resWithNumbers.push(`${el.length}${el[0]}`);
     } else {
-      resWithNumbers.push(el[0])
+      resWithNumbers.push(el[0]);
     }
-  })
-  return resWithNumbers.join('')
+  });
+
+  return resWithNumbers.join('');
 }
 
 module.exports = {
   encodeLine,
-}
+};

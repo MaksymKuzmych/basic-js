@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js')
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Implement class VigenereCipheringMachine that allows us to create
@@ -21,17 +21,21 @@ const { NotImplementedError } = require('../extensions/index.js')
  */
 class VigenereCipheringMachine {
   constructor(isDirect) {
-    this.isDirect = isDirect
-    this.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    this.isDirect = isDirect;
+    this.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   }
 
   encrypt(string, key) {
+    const res = [];
+
     if (arguments.length < 2 || typeof string !== 'string' || typeof key !== 'string') {
-      throw new Error('Incorrect arguments!')
+      throw new Error('Incorrect arguments!');
     }
-    let res = []
-    key = key.toUpperCase()
-    let saveStr = string
+
+    key = key.toUpperCase();
+
+    let saveStr = string;
+
     string
       .toUpperCase()
       .split(' ')
@@ -39,33 +43,40 @@ class VigenereCipheringMachine {
       .split('')
       .forEach((el, idx) => {
         if (!this.letters.includes(el)) {
-          res.push(el)
-          return
+          res.push(el);
+          return;
         }
-        let indexString = this.letters.indexOf(el)
-        let indexKey = this.letters.indexOf(key[idx % key.length])
-        console.log(indexString, indexKey, this.letters[(indexString + indexKey) % 26])
-        res.push(this.letters[(indexString + indexKey) % 26])
-      })
+
+        const indexString = this.letters.indexOf(el);
+        const indexKey = this.letters.indexOf(key[idx % key.length]);
+
+        res.push(this.letters[(indexString + indexKey) % 26]);
+      });
+
     saveStr.split('').forEach((el, idx) => {
       if (el === ' ') {
-        res.splice(idx, 0, ' ')
+        res.splice(idx, 0, ' ');
       }
-    })
+    });
+
     if (this.isDirect === undefined || this.isDirect === true) {
-      return res.join('')
+      return res.join('');
     } else {
-      return res.reverse().join('')
+      return res.reverse().join('');
     }
   }
 
   decrypt(string, key) {
+    const res = [];
+
     if (arguments.length < 2 || typeof string !== 'string' || typeof key !== 'string') {
-      throw new Error('Incorrect arguments!')
+      throw new Error('Incorrect arguments!');
     }
-    let res = []
-    key = key.toUpperCase()
-    let saveStr = string
+
+    key = key.toUpperCase();
+
+    let saveStr = string;
+
     string
       .toUpperCase()
       .split(' ')
@@ -73,31 +84,35 @@ class VigenereCipheringMachine {
       .split('')
       .forEach((el, idx) => {
         if (!this.letters.includes(el)) {
-          res.push(el)
-          return
+          res.push(el);
+          return;
         }
-        let indexString = this.letters.indexOf(el)
-        let indexKey = this.letters.indexOf(key[idx % key.length])
-        let diff = indexString - indexKey
+
+        const indexString = this.letters.indexOf(el);
+        const indexKey = this.letters.indexOf(key[idx % key.length]);
+        let diff = indexString - indexKey;
+
         if (indexString - indexKey < 0) {
-          diff = 26 + (indexString - indexKey)
+          diff = 26 + (indexString - indexKey);
         }
-        res.push(this.letters[diff % 26])
-      })
+
+        res.push(this.letters[diff % 26]);
+      });
+
     saveStr.split('').forEach((el, idx) => {
       if (el === ' ') {
-        res.splice(idx, 0, ' ')
+        res.splice(idx, 0, ' ');
       }
-    })
-    console.log(res)
+    });
+
     if (this.isDirect === undefined || this.isDirect === true) {
-      return res.join('')
+      return res.join('');
     } else {
-      return res.reverse().join('')
+      return res.reverse().join('');
     }
   }
 }
 
 module.exports = {
   VigenereCipheringMachine,
-}
+};

@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js')
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Create a repeating string based on the given parameters
@@ -16,38 +16,48 @@ const { NotImplementedError } = require('../extensions/index.js')
  *
  */
 function repeater(str, options) {
-  str = String(str)
+  const string = String(str);
+  const res = [];
+
   for (key in options) {
-    options[key] = String(options[key])
+    options[key] = String(options[key]);
   }
+
   if (!options.repeatTimes) {
-    options.repeatTimes = 1
+    options.repeatTimes = 1;
   }
+
   if (!options.separator) {
-    options.separator = '+'
+    options.separator = '+';
   }
+
   if (!options.addition) {
-    options.addition = ''
+    options.addition = '';
   }
+
   if (!options.additionRepeatTimes) {
-    options.additionRepeatTimes = 1
+    options.additionRepeatTimes = 1;
   }
+
   if (!options.additionSeparator) {
-    options.additionSeparator = '|'
+    options.additionSeparator = '|';
   }
-  let res = []
+
   for (let i = 0; i < options.repeatTimes; i++) {
-    let addition = []
+    const addition = [];
+
     for (let i = 0; i < options.additionRepeatTimes; i++) {
-      addition.push(options.addition)
+      addition.push(options.addition);
     }
-    let additionRes = addition.join(options.additionSeparator)
-    res.push([str, ...additionRes].join(''))
+
+    const additionRes = addition.join(options.additionSeparator);
+
+    res.push([string, ...additionRes].join(''));
   }
-  console.log(options)
-  return res.join(options.separator)
+
+  return res.join(options.separator);
 }
 
 module.exports = {
   repeater,
-}
+};

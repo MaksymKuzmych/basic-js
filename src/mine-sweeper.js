@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js')
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * In the popular Minesweeper game you have a board with some mines and those cells
@@ -24,35 +24,39 @@ const { NotImplementedError } = require('../extensions/index.js')
  * ]
  */
 function minesweeper(matrix) {
-  let newArr = JSON.parse(JSON.stringify(matrix))
+  const newArr = JSON.parse(JSON.stringify(matrix));
+  const resArr = [];
+
   newArr.forEach((el1, idx1) => {
     el1.forEach((el2, idx2) => {
-      newArr[idx1][idx2] = 0
-    })
-  })
+      newArr[idx1][idx2] = 0;
+    });
+  });
+
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
       if (matrix[i][j] == true) {
-        newArr[i][j + 1]++
-        newArr[i][j - 1]++
-        newArr[i + 1][j]++
-        newArr[i + 1][j + 1]++
-        newArr[i + 1][j - 1]++
+        newArr[i][j + 1]++;
+        newArr[i][j - 1]++;
+        newArr[i + 1][j]++;
+        newArr[i + 1][j + 1]++;
+        newArr[i + 1][j - 1]++;
         if (i != 0) {
-          newArr[i - 1][j]++
-          newArr[i - 1][j + 1]++
-          newArr[i - 1][j - 1]++
+          newArr[i - 1][j]++;
+          newArr[i - 1][j + 1]++;
+          newArr[i - 1][j - 1]++;
         }
       }
     }
   }
-  resArr = []
+
   newArr.forEach((el, idx) => {
-    resArr.push(newArr[idx].slice(0, 3))
-  })
-  return resArr
+    resArr.push(newArr[idx].slice(0, 3));
+  });
+
+  return resArr;
 }
 
 module.exports = {
   minesweeper,
-}
+};
